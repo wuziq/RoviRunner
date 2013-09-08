@@ -4,5 +4,6 @@
     <string name="app_name">Rovi Runner</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="play_local_files">Play music from my device</string>
 
 </resources>
