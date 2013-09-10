@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 
 import com.androiddomainmentor.rovirunner.R;
 import com.androiddomainmentor.rovirunner.presenter.IMainActivityPresenter;
@@ -19,6 +20,7 @@ public class MainActivity extends Activity implements
 {
     private IMainActivityPresenter m_presenter;
     private Button m_buttonPlayLocalMusic;
+    private ExpandableListView m_expListStreamMusic;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -33,11 +35,13 @@ public class MainActivity extends Activity implements
         
         // assign layout stuff to our members
         m_buttonPlayLocalMusic = (Button)findViewById( R.id.button_play_local_music );
+        m_expListStreamMusic = (ExpandableListView)findViewById( R.id.expandableListView_internet_music );
         
         // set event handlers
         m_buttonPlayLocalMusic.setOnClickListener( this );
-
-        // TODO [2013-09-07 KW] set up expandable list view
+        
+        m_expListStreamMusic.setAdapter( m_presenter.getStreamingSourcesAdapter() );
+        
     }
 
     @Override
@@ -58,6 +62,8 @@ public class MainActivity extends Activity implements
         case R.id.button_play_local_music:
             m_presenter.playLocalMusic();
             break;
+        case R.id.expandableListView_internet_music:
+            // TODO [2013-09-08 KW] do something
         default:
             // shouldn't get here
             break;
