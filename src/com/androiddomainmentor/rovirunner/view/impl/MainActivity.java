@@ -75,5 +75,50 @@ public class MainActivity extends Activity implements
     {
         return getApplicationContext();
     }
+    
+    
+    // TODO [2013-09-18 KW]:  implement lifecycle events
+    @Override
+    protected void onDestroy()
+    {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        // TODO Auto-generated method stub
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        // TODO Auto-generated method stub
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        // TODO Auto-generated method stub
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart()
+    {
+        // TODO Auto-generated method stub
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        // TODO Auto-generated method stub
+        super.onStop();
+    }
+
 
 }
