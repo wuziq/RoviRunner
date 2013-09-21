@@ -1,5 +1,9 @@
 package com.androiddomainmentor.rovirunner.model.impl;
 
+import java.io.IOException;
+
+import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 
 import com.androiddomainmentor.rovirunner.model.IRoviRunnerMediaPlayer;
@@ -7,17 +11,18 @@ import com.androiddomainmentor.rovirunner.model.IRoviRunnerMediaPlayer;
 public class RoviRunnerMediaPlayer implements IRoviRunnerMediaPlayer
 {
     private MediaPlayer m_player = null;
+    private Context m_context;
     
-    public RoviRunnerMediaPlayer()
+    public RoviRunnerMediaPlayer(Context context)
     {
-        // nothing yet
+        m_context = context;
+        m_player = new MediaPlayer();
     }
 
     @Override
     public boolean canPause()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
@@ -44,45 +49,48 @@ public class RoviRunnerMediaPlayer implements IRoviRunnerMediaPlayer
     @Override
     public int getCurrentPosition()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return m_player.getCurrentPosition();
     }
 
     @Override
     public int getDuration()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return m_player.getDuration();
     }
 
     @Override
     public boolean isPlaying()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return m_player.isPlaying();
     }
 
     @Override
     public void pause()
     {
-        // TODO Auto-generated method stub
-        
+        m_player.pause();
     }
 
     @Override
     public void seekTo( int pos )
     {
-        // TODO Auto-generated method stub
-        
+        m_player.seekTo(pos);
     }
 
     @Override
     public void start()
     {
-        // TODO Auto-generated method stub
-        
+        AssetFileDescriptor afd;
+        try
+        {
+            afd = m_context.getAssets().openFd("get_lucky_30s.mp3");
+            m_player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            m_player.prepare();
+            m_player.start();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
-    
-    
 }

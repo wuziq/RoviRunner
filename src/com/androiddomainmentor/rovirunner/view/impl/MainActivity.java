@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements
         switch ( v.getId() )
         {
         case R.id.button_play_local_music:
-            m_presenter.playLocalMusic();
+            m_presenter.playLocalMusic(this);
             break;
         case R.id.expandableListView_internet_music:
             // TODO [2013-09-08 KW] do something

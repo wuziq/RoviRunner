@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.widget.ExpandableListAdapter;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
 
 import com.androiddomainmentor.rovirunner.R;
 import com.androiddomainmentor.rovirunner.model.IStreamingSourcesManager;
+import com.androiddomainmentor.rovirunner.model.impl.RoviRunnerMediaPlayer;
 import com.androiddomainmentor.rovirunner.model.impl.StreamingSourcesManager;
 import com.androiddomainmentor.rovirunner.presenter.IMainActivityPresenter;
 import com.androiddomainmentor.rovirunner.view.IMainActivityView;
@@ -19,6 +21,7 @@ public class MainActivityPresenter implements IMainActivityPresenter
 {
     private IMainActivityView m_view;
     private IStreamingSourcesManager m_streamingSourcesMgr;
+    RoviRunnerMediaPlayer m_player;
 
     public MainActivityPresenter( IMainActivityView view )
     {
@@ -27,13 +30,17 @@ public class MainActivityPresenter implements IMainActivityPresenter
     }
 
     @Override
-    public void playLocalMusic()
+    public void playLocalMusic(Context context)
     {
         // TODO [2013-09-07 KW]: implement this
+        // NOTE: LOL
         Toast.makeText( m_view.getContextFromActivity(),
                         "OONTZ OONTZ OONTZ OONTZ",
                         Toast.LENGTH_LONG )
              .show();
+        
+        m_player = new RoviRunnerMediaPlayer(context);
+        m_player.start();
     }
 
     @Override
