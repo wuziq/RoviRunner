@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ExpandableListAdapter;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
@@ -16,16 +17,20 @@ import com.androiddomainmentor.rovirunner.model.impl.RoviRunnerMediaPlayer;
 import com.androiddomainmentor.rovirunner.model.impl.StreamingSourcesManager;
 import com.androiddomainmentor.rovirunner.presenter.IMainActivityPresenter;
 import com.androiddomainmentor.rovirunner.view.IMainActivityView;
+import com.androiddomainmentor.rovirunner.view.impl.MediaPlayerActivity;
 
 public class MainActivityPresenter implements IMainActivityPresenter
 {
-    private IMainActivityView m_view;
-    private IStreamingSourcesManager m_streamingSourcesMgr;
+    private IMainActivityView m_view = null;
+    private IStreamingSourcesManager m_streamingSourcesMgr = null;
+    private Context m_context = null;
     RoviRunnerMediaPlayer m_player;
 
-    public MainActivityPresenter( IMainActivityView view )
+    public MainActivityPresenter( IMainActivityView view, 
+                                  Context context )
     {
         m_view = view;
+        m_context = context;
         m_streamingSourcesMgr = new StreamingSourcesManager();
     }
 
@@ -34,13 +39,22 @@ public class MainActivityPresenter implements IMainActivityPresenter
     {
         // TODO [2013-09-07 KW]: implement this
         // NOTE: LOL
-        Toast.makeText( m_view.getContextFromActivity(),
+        Toast.makeText( m_context,
                         "OONTZ OONTZ OONTZ OONTZ",
                         Toast.LENGTH_LONG )
              .show();
         
-        m_player = new RoviRunnerMediaPlayer(context);
-        m_player.start();
+        //m_player = new RoviRunnerMediaPlayer(context);
+        //m_player.start();
+        
+        
+        
+        Intent intent = new Intent( m_context,
+                                    MediaPlayerActivity.class );
+
+        // send the intent
+        m_view.startActivity( intent );
+
     }
 
     @Override
@@ -70,7 +84,7 @@ public class MainActivityPresenter implements IMainActivityPresenter
         }
         listOfChildLists.add( children );
         
-        ExpandableListAdapter adapter = new SimpleExpandableListAdapter( m_view.getContextFromActivity(),
+        ExpandableListAdapter adapter = new SimpleExpandableListAdapter( m_context,
                                                                          listOfParents,
                                                                          R.layout.streaming_sources_group_view,
                                                                          new String[] { KEY_GROUP_NAME },

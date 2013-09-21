@@ -1,10 +1,11 @@
 package com.androiddomainmentor.rovirunner.view;
 
-import android.content.Context;
+import android.content.Intent;
+
 
 public interface IMainActivityView
 {
 
-    Context getContextFromActivity();
+    void startActivity( Intent intent );
 
 }

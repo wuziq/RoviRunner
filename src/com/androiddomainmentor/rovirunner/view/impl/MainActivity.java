@@ -1,7 +1,6 @@
 package com.androiddomainmentor.rovirunner.view.impl;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -18,30 +17,31 @@ public class MainActivity extends Activity implements
                                           IMainActivityView,
                                           OnClickListener
 {
-    private IMainActivityPresenter m_presenter;
-    private Button m_buttonPlayLocalMusic;
-    private ExpandableListView m_expListStreamMusic;
+    private IMainActivityPresenter m_presenter = null;
+    private Button m_buttonPlayLocalMusic = null;
+    private ExpandableListView m_expListStreamMusic = null;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        
+
         // instantiate presenter
-        m_presenter = new MainActivityPresenter( this );
-        
+        m_presenter = new MainActivityPresenter( this,
+                                                 getApplicationContext() );
+
         // set layout
         setContentView( R.layout.activity_main );
-        
+
         // assign layout stuff to our members
         m_buttonPlayLocalMusic = (Button)findViewById( R.id.button_play_local_music );
         m_expListStreamMusic = (ExpandableListView)findViewById( R.id.expandableListView_internet_music );
-        
+
         // set event handlers
         m_buttonPlayLocalMusic.setOnClickListener( this );
-        
+
         m_expListStreamMusic.setAdapter( m_presenter.getStreamingSourcesAdapter() );
-        
+
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements
         switch ( v.getId() )
         {
         case R.id.button_play_local_music:
-            m_presenter.playLocalMusic(this);
+            m_presenter.playLocalMusic( this );
             break;
         case R.id.expandableListView_internet_music:
             // TODO [2013-09-08 KW] do something
@@ -70,14 +70,7 @@ public class MainActivity extends Activity implements
         }
     }
 
-    @Override
-    public Context getContextFromActivity()
-    {
-        return getApplicationContext();
-    }
-    
-    
-    // TODO [2013-09-18 KW]:  implement lifecycle events
+    // TODO [2013-09-18 KW]: implement lifecycle events
     @Override
     protected void onDestroy()
     {
@@ -119,6 +112,5 @@ public class MainActivity extends Activity implements
         // TODO Auto-generated method stub
         super.onStop();
     }
-
 
 }

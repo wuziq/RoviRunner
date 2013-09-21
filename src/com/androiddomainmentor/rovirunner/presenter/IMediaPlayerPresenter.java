@@ -6,4 +6,6 @@ public interface IMediaPlayerPresenter
 {
 
     public MediaPlayerControl getMediaPlayerControl();
+
+    public void playRandomSong();
 }

@@ -23,7 +23,8 @@ public class MediaPlayerActivity extends Activity implements IMediaPlayerView
         super.onCreate( savedInstanceState );
 
         // instantiate presenter
-        m_presenter = new MediaPlayerPresenter( this );
+        m_presenter = new MediaPlayerPresenter( this, 
+                                                getApplicationContext() );
 
         // set layout
         setContentView( R.layout.mediaplayer_view );
@@ -33,8 +34,12 @@ public class MediaPlayerActivity extends Activity implements IMediaPlayerView
         m_artistText = (TextView)findViewById( R.id.artist_text_view );
         m_songText = (TextView)findViewById( R.id.song_text_view );
 
-        // TODO [2013-09-18 KW]: hook up controller to media player
+        // hook up media player to media control
         m_mediaController.setMediaPlayer( m_presenter.getMediaPlayerControl() );
+        m_mediaController.setAnchorView( getCurrentFocus() );
+        
+        // TODO [2013-09-21 KW]:  for now, play a song
+        m_presenter.playRandomSong();
     }
 
     @Override
