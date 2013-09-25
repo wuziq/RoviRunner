@@ -32,13 +32,6 @@
                 <version>${platform.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android-test</artifactId>
-                <version>${platform.version}</version>
-                <scope>provided</scope>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
