@@ -39,7 +39,7 @@ public class MediaPlayerPresenter implements
 
     private void setUpMediaPlayer()
     {
-        m_mediaPlayer = new RoviRunnerMediaPlayer( m_context );
+        m_mediaPlayer = new RoviRunnerMediaPlayer();
         m_mediaPlayer.setOnPreparedListener( this );
         m_mediaPlayer.setOnCompletionListener( this );
         m_mediaPlayer.setOnErrorListener( this );
